@@ -1,0 +1,1 @@
+C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\WiredBrainCoffee.AdminApp.csproj;x86

@@ -1,0 +1,4 @@
+Course: Microsoft Azure Developer: Implementing Blob Storage
+Author: Thomas Claudius Huber
+Tools:
+ - https://github.com/Azure/Azurite: use azure storage in a local environment
