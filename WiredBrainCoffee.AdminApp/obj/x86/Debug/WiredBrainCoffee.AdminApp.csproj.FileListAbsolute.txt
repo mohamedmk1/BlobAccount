@@ -99,3 +99,4 @@ C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bi
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\Microsoft.Azure.Storage.Blob.dll
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\Microsoft.Azure.Storage.Common.dll
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\Newtonsoft.Json.dll
+C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\obj\x86\Debug\WiredBrainCoffee.AdminApp.csproj.CoreCompileInputs.cache

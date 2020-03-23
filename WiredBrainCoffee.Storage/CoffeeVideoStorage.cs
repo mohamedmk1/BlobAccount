@@ -1,51 +1,72 @@
 ﻿using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace WiredBrainCoffee.Storage
 {
   public class CoffeeVideoStorage : ICoffeeVideoStorage
   {
-    private readonly string _connectionString;
-    private readonly string _containerNameVideos = "coffeevideos";
+        private readonly string _connectionString;
+        private readonly string _containerNameVideos = "coffeevideos";
 
-    public CoffeeVideoStorage(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
+        public CoffeeVideoStorage(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
 
-    public async Task<CloudBlockBlob> UploadVideoAsync(byte[] videoByteArray, string blobName)
-    {
-        CloudBlobContainer cloudBlobContainer = await GetCoffeeVideosContainerAsync();
+        public async Task<CloudBlockBlob> UploadVideoAsync(byte[] videoByteArray, string blobName)
+        {
+            CloudBlobContainer cloudBlobContainer = await GetCoffeeVideosContainerAsync();
 
-        var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
+            var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
 
-        cloudBlockBlob.Properties.ContentType = "video/mp4";
+            cloudBlockBlob.Properties.ContentType = "video/mp4";
 
-        await cloudBlockBlob.UploadFromByteArrayAsync(videoByteArray, 0, videoByteArray.Length);
+            await cloudBlockBlob.UploadFromByteArrayAsync(videoByteArray, 0, videoByteArray.Length);
 
-        return cloudBlockBlob;
-    }
+            return cloudBlockBlob;
+        }
 
-    private async Task<CloudBlobContainer> GetCoffeeVideosContainerAsync()
-    {
-        var cloudStorageAccount = CloudStorageAccount.Parse(_connectionString);
 
-        var cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+        public async Task<bool> CheckIfBlobExistsAsync(string blobName)
+        {
+            CloudBlobContainer cloudBlobContainer = await GetCoffeeVideosContainerAsync();
 
-        var cloudBlobContainer = cloudBlobClient.GetContainerReference(_containerNameVideos);
-        await cloudBlobContainer.CreateIfNotExistsAsync(
-                BlobContainerPublicAccessType.Blob, null, null);
-        return cloudBlobContainer;
-    }
+            var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
 
-    public async Task<bool> CheckIfBlobExistsAsync(string blobName)
-    {
-        CloudBlobContainer cloudBlobContainer = await GetCoffeeVideosContainerAsync();
+            return await cloudBlockBlob.ExistsAsync();
+        }
 
-        var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
+        public async Task<IEnumerable<CloudBlockBlob>> ListVideoBlobsAsync(string prefix = null)
+        {
+            var cloudBlockBlobs = new List<CloudBlockBlob>();
+            var cloudBlobContainer = await GetCoffeeVideosContainerAsync();
+            BlobContinuationToken token = null;
 
-        return await cloudBlockBlob.ExistsAsync();
-    }
+            do
+            {
+                var blobResultSegment = await cloudBlobContainer.ListBlobsSegmentedAsync(prefix, true, BlobListingDetails.None, 1, token, null, null);
+                token = blobResultSegment.ContinuationToken;
+                cloudBlockBlobs.AddRange(blobResultSegment.Results.OfType<CloudBlockBlob>());
+            }
+            while (token != null);
+
+            return cloudBlockBlobs;
+        }
+
+        private async Task<CloudBlobContainer> GetCoffeeVideosContainerAsync()
+        {
+            var cloudStorageAccount = CloudStorageAccount.Parse(_connectionString);
+
+            var cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+
+            var cloudBlobContainer = cloudBlobClient.GetContainerReference(_containerNameVideos);
+            await cloudBlobContainer.CreateIfNotExistsAsync(
+                    BlobContainerPublicAccessType.Blob, null, null);
+
+            return cloudBlobContainer;
+        }
   }
 }

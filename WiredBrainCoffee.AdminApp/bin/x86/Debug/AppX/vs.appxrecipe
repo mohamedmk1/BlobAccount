@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>F9D1753F4DCC94C62CD140592323FB361EC3C17DB0FE77528EC29385ACBC4083</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>D7B9EF24A0028822E970838FC361A76FC53C298A31B34D87AA2684E8B7D91E3F</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>38e8dcb7-9bdd-42e0-90d1-a43ae9db033c_1.0.0.0_x86__gkx4qx1bgg8j8</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>38e8dcb7-9bdd-42e0-90d1-a43ae9db033c_gkx4qx1bgg8j8!App</RegisteredUserModeAppID>
     <RegisteredPackageID>38e8dcb7-9bdd-42e0-90d1-a43ae9db033c</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-03-22T18:03:44.271</Modified>
+      <Modified>2020-03-23T18:43:13.800</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\WiredBrainCoffee.AdminApp.exe">
       <PackagePath>entrypoint\WiredBrainCoffee.AdminApp.exe</PackagePath>
-      <Modified>2020-03-22T18:03:43.388</Modified>
+      <Modified>2020-03-23T18:43:13.240</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\m.el-mabrouk\.nuget\packages\autofac\4.9.3\lib\netstandard2.0\Autofac.dll">
       <PackagePath>Autofac.dll</PackagePath>
@@ -64,7 +64,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\bin\Debug\netstandard2.0\WiredBrainCoffee.Storage.dll">
       <PackagePath>WiredBrainCoffee.Storage.dll</PackagePath>
-      <Modified>2020-03-22T18:03:36.761</Modified>
+      <Modified>2020-03-23T18:39:30.545</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</PackagePath>
@@ -135,23 +135,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\WiredBrainCoffee.AdminApp.xr.xml">
       <PackagePath>WiredBrainCoffee.AdminApp.xr.xml</PackagePath>
-      <Modified>2020-03-22T12:46:23.872</Modified>
+      <Modified>2020-03-23T18:43:13.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2020-03-22T18:03:43.182</Modified>
+      <Modified>2020-03-23T18:43:13.012</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\View\AddCoffeeVideoDialog.xbf">
       <PackagePath>View\AddCoffeeVideoDialog.xbf</PackagePath>
-      <Modified>2020-03-22T18:03:43.182</Modified>
+      <Modified>2020-03-23T18:43:13.012</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\View\CoffeeVideoView.xbf">
       <PackagePath>View\CoffeeVideoView.xbf</PackagePath>
-      <Modified>2020-03-22T18:03:43.182</Modified>
+      <Modified>2020-03-23T18:43:13.012</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\View\MainPage.xbf">
       <PackagePath>View\MainPage.xbf</PackagePath>
-      <Modified>2020-03-22T18:03:43.182</Modified>
+      <Modified>2020-03-23T18:43:13.013</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -159,11 +159,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2020-03-22T14:06:46.570</Modified>
+      <Modified>2020-03-23T18:18:34.981</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\Core\WiredBrainCoffee.AdminApp.exe">
       <PackagePath>WiredBrainCoffee.AdminApp.exe</PackagePath>
-      <Modified>2020-03-22T18:03:44.265</Modified>
+      <Modified>2020-03-23T18:43:13.794</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
@@ -223,36 +223,36 @@
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27323.0</Version>
+      <Version>14.0.27810.0</Version>
       <Architecture>ARM</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27323.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.14.00.appx</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27323.0</Version>
+      <Version>14.0.27810.0</Version>
       <Architecture>ARM64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27323.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM64\Microsoft.VCLibs.ARM64.Debug.14.00.appx</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27323.0</Version>
+      <Version>14.0.27810.0</Version>
       <Architecture>x64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27323.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.14.00.appx</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27323.0</Version>
+      <Version>14.0.27810.0</Version>
       <Architecture>x86</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27323.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.14.00.appx</AppxLocation>
       <MoreInfo>
       </MoreInfo>

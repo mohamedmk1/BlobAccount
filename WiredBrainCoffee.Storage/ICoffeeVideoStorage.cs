@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Storage.Blob;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WiredBrainCoffee.Storage
@@ -7,5 +8,6 @@ namespace WiredBrainCoffee.Storage
   {
     Task<CloudBlockBlob> UploadVideoAsync(byte[] videoByteArray, string blobname);
     Task<bool> CheckIfBlobExistsAsync(string blobName);
+    Task<IEnumerable<CloudBlockBlob>> ListVideoBlobsAsync(string prefix); 
   }
 }
