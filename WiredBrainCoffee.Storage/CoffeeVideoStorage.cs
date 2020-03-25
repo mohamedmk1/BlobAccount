@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -54,6 +55,16 @@ namespace WiredBrainCoffee.Storage
             while (token != null);
 
             return cloudBlockBlobs;
+        }
+
+        public async Task DownloadVideoAsync(CloudBlockBlob cloudBlockBlob, Stream targetStream)
+        {
+            await cloudBlockBlob.DownloadToStreamAsync(targetStream);
+        }
+
+        public async Task DeleteVideoAsync(CloudBlockBlob cloudBlockBlob)
+        {
+            await cloudBlockBlob.DeleteAsync();
         }
 
         private async Task<CloudBlobContainer> GetCoffeeVideosContainerAsync()

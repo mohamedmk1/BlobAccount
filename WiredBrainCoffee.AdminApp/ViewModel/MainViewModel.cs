@@ -3,10 +3,17 @@ using WiredBrainCoffee.Storage;
 using System;
 using System.Collections.ObjectModel;
 using WiredBrainCoffee.AdminApp.Service;
+using Microsoft.Azure.Storage.Blob;
 
 namespace WiredBrainCoffee.AdminApp.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public interface IMainViewModel
+    {
+        void StartLoading(string message);
+        void StopLoading();
+        void RemoveCoffeeVideoViewModel(CoffeeVideoViewModel coffeeVideoViewModel);
+    }
+    public class MainViewModel : ViewModelBase, IMainViewModel
     {
         private string _prefix;
         private bool _isLoading;
@@ -14,15 +21,18 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
         private readonly ICoffeeVideoStorage _coffeeVideoStorage;
         private readonly IAddCoffeeVideoDialogService _addCoffeeVideoDialogService;
         private readonly IMessageDialogService _messageDialogService;
+        private readonly Func<CloudBlockBlob, CoffeeVideoViewModel> _coffeeVideoViewModelCreator;
         private CoffeeVideoViewModel _selectedCoffeeVideoViewModel;
 
         public MainViewModel(ICoffeeVideoStorage coffeeVideoStorage,
           IAddCoffeeVideoDialogService addCoffeeVideoDialogService,
-          IMessageDialogService messageDialogService)
+          IMessageDialogService messageDialogService,
+          Func<CloudBlockBlob, CoffeeVideoViewModel> coffeeVideoViewModelCreator)
         {
             _coffeeVideoStorage = coffeeVideoStorage;
             _addCoffeeVideoDialogService = addCoffeeVideoDialogService;
             _messageDialogService = messageDialogService;
+            _coffeeVideoViewModelCreator = coffeeVideoViewModelCreator;
             CoffeeVideos = new ObservableCollection<CoffeeVideoViewModel>();
         }
 
@@ -90,7 +100,7 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
                         dialogData.BlobByteArray,
                         dialogData.BlobName);
 
-                    var coffeeVideoViewModel = new CoffeeVideoViewModel(cloudBlockBlob);
+                    var coffeeVideoViewModel = _coffeeVideoViewModelCreator(cloudBlockBlob);
                     CoffeeVideos.Add(coffeeVideoViewModel);
                     SelectedCoffeeVideo = coffeeVideoViewModel;
                 }
@@ -114,7 +124,7 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
                 CoffeeVideos.Clear();
                 foreach (var cloudBlockBlob in cloudBlockBlobs)
                 {
-                    CoffeeVideos.Add(new CoffeeVideoViewModel(cloudBlockBlob));
+                    CoffeeVideos.Add(_coffeeVideoViewModelCreator(cloudBlockBlob));
                 }
             }
             catch (Exception ex)
@@ -124,6 +134,18 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
             finally
             {
                 StopLoading();
+            }
+        }
+
+        public void RemoveCoffeeVideoViewModel(CoffeeVideoViewModel viewModel)
+        {
+            if (CoffeeVideos.Contains(viewModel))
+            {
+                CoffeeVideos.Remove(viewModel);
+                if (SelectedCoffeeVideo == viewModel)
+                {
+                    SelectedCoffeeVideo = null;
+                }
             }
         }
 
