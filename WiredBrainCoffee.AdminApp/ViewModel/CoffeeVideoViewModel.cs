@@ -16,6 +16,8 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
         private readonly IMessageDialogService _messageDialogService;
         private IMainViewModel _mainViewModel;
         private readonly ICoffeeVideoStorage _coffeeVideoStorage;
+        private string _title;
+        private string _description;
 
 
         public CoffeeVideoViewModel(CloudBlockBlob cloudBlockBlob,
@@ -29,10 +31,42 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
             _messageDialogService = messageDialogService;
             _mainViewModel = mainViewModel;
             _coffeeVideoStorage = coffeeVideoStorage;
+            UpdateViewModelPropertiesFromMetadata();
         }
         public string BlobName => _cloudBlockBlob.Name;
 
         public string BlobUri => _cloudBlockBlob.Uri.ToString();
+
+        public string Title
+        {
+            get { return _title;  }
+            set
+            {
+                _title = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsMetadataChanged));
+            }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsMetadataChanged));
+            }
+        }
+
+        public bool IsMetadataChanged
+        {
+            get
+            {
+                var (title, description) = _coffeeVideoStorage.GetBlobMetadata(_cloudBlockBlob);
+                return title != Title || description != Description;
+            }
+        }
 
         public async Task DownloadVideoToFileAsync()
         {
@@ -83,6 +117,49 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
                     _mainViewModel.StopLoading();
                 }
             }
+        }
+
+        public async Task ReloadMetadataAsync()
+        {
+            try
+            {
+                _mainViewModel.StartLoading($"Reloading metadata");
+                await _coffeeVideoStorage.ReloadMetadataAsync(_cloudBlockBlob);
+                UpdateViewModelPropertiesFromMetadata();
+            }
+            catch (Exception ex)
+            {
+                await _messageDialogService.ShowInfoDialogAsync(ex.Message, "Error");
+            }
+            finally
+            {
+                _mainViewModel.StopLoading();
+            }
+        }
+
+        public async Task UpdateMetadataAsync()
+        {
+            try
+            {
+                _mainViewModel.StartLoading($"Updating metadata");
+                await _coffeeVideoStorage.UpdateMetadataAsync(_cloudBlockBlob, Title, Description);
+                OnPropertyChanged(nameof(IsMetadataChanged));
+            }
+            catch (Exception ex)
+            {
+                await _messageDialogService.ShowInfoDialogAsync(ex.Message, "Error");
+            }
+            finally
+            {
+                _mainViewModel.StopLoading();
+            }
+        }
+
+        private void UpdateViewModelPropertiesFromMetadata()
+        {
+            var (title, description) = _coffeeVideoStorage.GetBlobMetadata(_cloudBlockBlob);
+            Title = title;
+            Description = description;
         }
     }
 }

@@ -43,25 +43,25 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Content" />
-      <RootProperty Name="Flyout" />
-      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="IsEnabled" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Flyout" />
       <RootProperty Name="Background" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Header" />
       <RootProperty Name="Text" />
-      <RootProperty Name="IsReadOnly" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="IsReadOnly" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="Text" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="WiredBrainCoffee.AdminApp.View.AddCoffeeVideoDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">

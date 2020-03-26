@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBox x:ConnectionId='2'                                               
@@ -27,9 +28,9 @@
             <Button Content="Video actions"  Margin="5">
                 <Button.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <MenuFlyoutItem x:ConnectionId='5' Text="Download video" Icon="Download"
+                        <MenuFlyoutItem x:ConnectionId='9' Text="Download video" Icon="Download"
                                                                                />
-                        <MenuFlyoutItem x:ConnectionId='6' Text="Delete video" Icon="Delete"
+                        <MenuFlyoutItem x:ConnectionId='10' Text="Delete video" Icon="Delete"
                                                                        />
                     </MenuFlyout>
                 </Button.Flyout>
@@ -37,8 +38,27 @@
         </StackPanel>
 
         <Border Grid.Row="3" Margin="10 0 10 10" Padding="10" Background="#333333">
-            <MediaElement x:ConnectionId='4' AutoPlay="False"                                                
+            <MediaElement x:ConnectionId='8' AutoPlay="False"                                                
                                 AreTransportControlsEnabled="True" IsMuted="True"/>
+        </Border>
+
+        <Border Grid.Row="4" Background="#333333" Margin="10">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Blob Metadata" Margin="10 5 0 0"/>
+                <StackPanel VerticalAlignment="Bottom">
+                    <Button x:ConnectionId='6' Content="Update metadata"                                                             
+                                                                           Margin="10 10 10 0" HorizontalAlignment="Stretch"/>
+                    <Button x:ConnectionId='7' Content="Reload metadata"                                                Margin="10" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBox x:ConnectionId='4' Header="Title"                                                                                 Margin="0 5 10 0"/>
+                    <TextBox x:ConnectionId='5' Header="Description"                                                                                       Margin="0 5 10 10"/>
+                </StackPanel>
+            </Grid>
         </Border>
 
     </Grid>

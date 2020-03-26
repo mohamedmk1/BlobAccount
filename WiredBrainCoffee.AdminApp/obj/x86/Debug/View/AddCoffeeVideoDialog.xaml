@@ -17,12 +17,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Button x:ConnectionId='2' Margin="0 0 0 10" VerticalAlignment="Bottom"
                     Content="Select video..."                                            />
         <TextBox x:ConnectionId='3' Grid.Row="1" Header="Blob name (sample: 2018/10/01/programmingvideo)"                                                                                                   />
         <TextBlock Grid.Row="1" Grid.Column="1" Text=".mp4" VerticalAlignment="Bottom"/>
+
+        <TextBox x:ConnectionId='4' Grid.Row="2" Header="Title"                                                                                      Margin="0 20"/>
+        <TextBox x:ConnectionId='5' Grid.Row="3" Header="Description"                                                                                          />
     </Grid>
 </ContentDialog>
 

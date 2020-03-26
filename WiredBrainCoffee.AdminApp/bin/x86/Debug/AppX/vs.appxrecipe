@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-03-25T11:31:50.643</Modified>
+      <Modified>2020-03-26T23:10:38.296</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\WiredBrainCoffee.AdminApp.exe">
       <PackagePath>entrypoint\WiredBrainCoffee.AdminApp.exe</PackagePath>
-      <Modified>2020-03-25T11:31:50.093</Modified>
+      <Modified>2020-03-26T23:10:37.849</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\m.el-mabrouk\.nuget\packages\autofac\4.9.3\lib\netstandard2.0\Autofac.dll">
       <PackagePath>Autofac.dll</PackagePath>
@@ -64,7 +64,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\bin\Debug\netstandard2.0\WiredBrainCoffee.Storage.dll">
       <PackagePath>WiredBrainCoffee.Storage.dll</PackagePath>
-      <Modified>2020-03-25T11:31:42.093</Modified>
+      <Modified>2020-03-26T23:04:09.522</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</PackagePath>
@@ -135,23 +135,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\WiredBrainCoffee.AdminApp.xr.xml">
       <PackagePath>WiredBrainCoffee.AdminApp.xr.xml</PackagePath>
-      <Modified>2020-03-25T11:13:54.021</Modified>
+      <Modified>2020-03-26T23:10:37.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2020-03-25T11:31:49.828</Modified>
+      <Modified>2020-03-26T23:10:37.692</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\View\AddCoffeeVideoDialog.xbf">
       <PackagePath>View\AddCoffeeVideoDialog.xbf</PackagePath>
-      <Modified>2020-03-25T11:31:49.828</Modified>
+      <Modified>2020-03-26T23:10:37.694</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\View\CoffeeVideoView.xbf">
       <PackagePath>View\CoffeeVideoView.xbf</PackagePath>
-      <Modified>2020-03-25T11:31:49.829</Modified>
+      <Modified>2020-03-26T23:10:37.694</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\View\MainPage.xbf">
       <PackagePath>View\MainPage.xbf</PackagePath>
-      <Modified>2020-03-25T11:31:49.829</Modified>
+      <Modified>2020-03-26T23:10:37.694</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -163,7 +163,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.AdminApp\bin\x86\Debug\Core\WiredBrainCoffee.AdminApp.exe">
       <PackagePath>WiredBrainCoffee.AdminApp.exe</PackagePath>
-      <Modified>2020-03-25T11:31:50.637</Modified>
+      <Modified>2020-03-26T23:10:38.290</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
