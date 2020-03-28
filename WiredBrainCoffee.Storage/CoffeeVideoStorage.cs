@@ -115,8 +115,7 @@ namespace WiredBrainCoffee.Storage
             var cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
 
             var cloudBlobContainer = cloudBlobClient.GetContainerReference(_containerNameVideos);
-            await cloudBlobContainer.CreateIfNotExistsAsync(
-                    BlobContainerPublicAccessType.Blob, null, null);
+            await cloudBlobContainer.CreateIfNotExistsAsync();
 
             return cloudBlobContainer;
         }

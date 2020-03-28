@@ -1,7 +1,6 @@
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\bin\Debug\netstandard2.0\WiredBrainCoffee.Storage.deps.json
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\bin\Debug\netstandard2.0\WiredBrainCoffee.Storage.dll
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\bin\Debug\netstandard2.0\WiredBrainCoffee.Storage.pdb
-C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\obj\Debug\netstandard2.0\WiredBrainCoffee.Storage.csprojAssemblyReference.cache
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\obj\Debug\netstandard2.0\WiredBrainCoffee.Storage.AssemblyInfoInputs.cache
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\obj\Debug\netstandard2.0\WiredBrainCoffee.Storage.AssemblyInfo.cs
 C:\Tutos\C#\Pluralight\BlobAccount.WiredBrainCoffee\WiredBrainCoffee.Storage\obj\Debug\netstandard2.0\WiredBrainCoffee.Storage.dll

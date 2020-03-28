@@ -25,17 +25,17 @@ namespace WiredBrainCoffee.WebApp.Pages
     {
       var coffeeVideoModels = new List<CoffeeVideoModel>();
 
-      var cloudBlockBlobs = await _coffeeVideoStorage.ListVideoBlobsAsync();
+      var cloudBlockBlobs = await _coffeeVideoStorage.ListVideoBlobsAsync(null);
 
       foreach (var cloudBlockBlob in cloudBlockBlobs)
       {
         var (title, description) = _coffeeVideoStorage.GetBlobMetadata(cloudBlockBlob);
-        coffeeVideoModels.Add(new CoffeeVideoModel
-        {
-          Title = title,
-          Description = description,
-          BlobUri = cloudBlockBlob.Uri.ToString()
-        });
+                coffeeVideoModels.Add(new CoffeeVideoModel
+                {
+                    Title = title,
+                    Description = description,
+                    BlobUri = _coffeeVideoStorage.GetBlobUriWithSaasToken(cloudBlockBlob)
+                }); ; ;
       }
 
       return coffeeVideoModels;
