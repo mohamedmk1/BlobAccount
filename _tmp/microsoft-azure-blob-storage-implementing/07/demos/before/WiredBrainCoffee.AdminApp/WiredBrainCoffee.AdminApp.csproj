@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
+    <Compile Include="ViewModel\unit.cs" />
     <Compile Include="View\AddCoffeeVideoDialog.xaml.cs">
       <DependentUpon>AddCoffeeVideoDialog.xaml</DependentUpon>
     </Compile>

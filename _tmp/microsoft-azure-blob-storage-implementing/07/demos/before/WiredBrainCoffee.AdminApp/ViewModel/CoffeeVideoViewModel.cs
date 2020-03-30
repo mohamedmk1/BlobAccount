@@ -1,7 +1,12 @@
-﻿using Microsoft.Azure.Storage.Blob;
+﻿using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml;
 using WiredBrainCoffee.AdminApp.Service;
 using WiredBrainCoffee.Storage;
 
@@ -10,13 +15,16 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
     public class CoffeeVideoViewModel : ViewModelBase
     {
         private CloudBlockBlob _cloudBlockBlob;
-
+        private readonly DispatcherTimer _leaseRenewTimer;
         private readonly IFilePickerDialogService _filePickerDialogService;
         private readonly IMessageDialogService _messageDialogService;
         private IMainViewModel _mainViewModel;
         private readonly ICoffeeVideoStorage _coffeeVideoStorage;
         private string _title;
         private string _description;
+        private string _leaseId;
+
+        private readonly string _conditionNotMetError = "ConditionNotMet";
 
         public CoffeeVideoViewModel(CloudBlockBlob cloudBlockBlob,
          ICoffeeVideoStorage coffeeVideoStorage,
@@ -26,6 +34,17 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
         {
             _cloudBlockBlob = cloudBlockBlob
               ?? throw new ArgumentNullException(nameof(cloudBlockBlob));
+
+            _leaseRenewTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(45)
+            };
+
+            _leaseRenewTimer.Tick += async (e, s) =>
+            {
+                await _coffeeVideoStorage.RenewLeaseAsync(cloudBlockBlob, LeaseId);
+                Debug.WriteLine("Lease renewed");
+            };
 
             _filePickerDialogService = filePickerDialogService;
             _messageDialogService = messageDialogService;
@@ -39,7 +58,7 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
 
         public string BlobUri => _cloudBlockBlob.Uri.ToString();
 
-        public string BlobUriWithSassToken => _coffeeVideoStorage.GetBlobUriWithSaasToken(_cloudBlockBlob);
+        public string BlobUriWithSasToken => _coffeeVideoStorage.GetBlobUriWithSaasToken(_cloudBlockBlob);
 
 
 
@@ -80,6 +99,19 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
             }
         }
 
+        public bool HasLease => LeaseId != null;
+
+        public string LeaseId
+        {
+            get => _leaseId;
+            private set
+            {
+                _leaseId = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasLease));
+            }
+        }
+
         public async Task DownloadVideoToFileAsync()
         {
             try
@@ -104,6 +136,43 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
             }
         }
 
+        public async Task OverwriteVideoAsync()
+        {
+            try
+            {
+                var storageFile = await _filePickerDialogService.ShowMp4FileOpenDialogAsync();
+                if (storageFile != null)
+                {
+                    _mainViewModel.StartLoading($"Overwriting your video {BlobName}");
+                    var randomAccessStream = await storageFile.OpenReadAsync();
+                    var videoByteArray = new byte[randomAccessStream.Size];
+                    using (var dataReader = new DataReader(randomAccessStream))
+                    {
+                        await dataReader.LoadAsync((uint)randomAccessStream.Size);
+                        dataReader.ReadBytes(videoByteArray);
+                    };
+
+                    await _coffeeVideoStorage.OverwriteVideoAsync(_cloudBlockBlob, videoByteArray, LeaseId);
+                    OnPropertyChanged(nameof(BlobUri));
+                    OnPropertyChanged(nameof(BlobUriWithSasToken));
+                }
+            }
+            catch (StorageException ex) when (
+                ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed
+                && ex.RequestInformation.ErrorCode == _conditionNotMetError)
+            {
+                await ShowVideoChangedMessageAndReloadAsync();
+            }
+            catch (Exception ex)
+            {
+                await _messageDialogService.ShowInfoDialogAsync(ex.Message, "Error");
+            }
+            finally
+            {
+                _mainViewModel.StopLoading();
+            }
+        }
+
         public async Task DeleteVideoAsync()
         {
             try
@@ -112,11 +181,17 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
                 if (isOk)
                 {
                     _mainViewModel.StartLoading($"Deleting your video {BlobName}");
-                    await _coffeeVideoStorage.DeleteVideoAsync(_cloudBlockBlob);
+                    await _coffeeVideoStorage.DeleteVideoAsync(_cloudBlockBlob, LeaseId);
                     _mainViewModel.RemoveCoffeeVideoViewModel(this);
                     _mainViewModel.StopLoading();
                     _mainViewModel = null;
                 }
+            }
+            catch (StorageException ex) when (
+                ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed
+                && ex.RequestInformation.ErrorCode == _conditionNotMetError)
+            {
+                await ShowVideoChangedMessageAndReloadAsync();
             }
             catch (Exception ex)
             {
@@ -136,8 +211,14 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
             try
             {
                 _mainViewModel.StartLoading($"Updating metadata");
-                await _coffeeVideoStorage.UpdateMetadataAsync(_cloudBlockBlob, Title, Description);
+                await _coffeeVideoStorage.UpdateMetadataAsync(_cloudBlockBlob, Title, Description, LeaseId);
                 OnPropertyChanged(nameof(IsMetadataChanged));
+            }
+            catch (StorageException ex) when (
+                ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed
+                && ex.RequestInformation.ErrorCode == _conditionNotMetError)
+            {
+                await ShowVideoChangedMessageAndReloadAsync();
             }
             catch (Exception ex)
             {
@@ -167,11 +248,67 @@ namespace WiredBrainCoffee.AdminApp.ViewModel
             }
         }
 
+        public async Task AcquireLeaseAsync()
+        {
+            try
+            {
+                LeaseId = await _coffeeVideoStorage.AcquireOneMinuteLeaseAsync(_cloudBlockBlob);
+                _leaseRenewTimer.Start();
+                await _messageDialogService.ShowInfoDialogAsync($"Lease acquired. Lease Id: {LeaseId}", "Info");
+            }
+            catch (StorageException ex) when (
+                ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed
+                && ex.RequestInformation.ErrorCode == _conditionNotMetError)
+            {
+                await ShowVideoChangedMessageAndReloadAsync();
+            }
+            catch (Exception ex)
+            {
+                await _messageDialogService.ShowInfoDialogAsync(ex.Message, "Error");
+            }
+        }
+
+        public async Task ReleaseLeaseAsync()
+        {
+            try
+            {
+                _leaseRenewTimer.Stop();
+                await _coffeeVideoStorage.ReleaseLeaseAsync(_cloudBlockBlob, LeaseId);
+                LeaseId = null;
+                await _messageDialogService.ShowInfoDialogAsync($"Lease was released", "Info");
+            }
+            catch (Exception ex)
+            {
+                await _messageDialogService.ShowInfoDialogAsync(ex.Message, "Error");
+            }
+        }
+
+        public async Task ShowLeaseInfoAsync()
+        {
+            try
+            {
+                var leaseInfo = await _coffeeVideoStorage.LoadLeaseInfoAsync(_cloudBlockBlob);
+                await _messageDialogService.ShowInfoDialogAsync(leaseInfo, "Info");
+            }
+            catch (Exception ex)
+            {
+                await _messageDialogService.ShowInfoDialogAsync(ex.Message, "Error");
+            }
+        }
+
+
         private void UpdateViewModelPropertiesFromMetadata()
         {
             var (title, description) = _coffeeVideoStorage.GetBlobMetadata(_cloudBlockBlob);
             Title = title;
             Description = description;
+        }
+
+        private async Task ShowVideoChangedMessageAndReloadAsync()
+        {
+            await _messageDialogService.ShowInfoDialogAsync("Someone else has changed this video, we will reload it and then you can update", "Information");
+            await ReloadMetadataAsync();
+            OnPropertyChanged(nameof(BlobUriWithSasToken));
         }
     }
 }
